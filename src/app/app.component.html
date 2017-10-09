@@ -1,20 +1,71 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{title}}!
-  </h1>
-  <img width="300" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+<div class="main">
+  <h1>Items changer</h1>
+  <div class="row justify-content-center under-main">
 
+    <!-- USER1 START! -->
+    <div class="col-md-5 no-padding">
+      <h4>USER 1</h4>
+      <div class="grid-cell row justify-content-center">
+        <div *ngFor="let item of listItemsUser1; let i = index" [attr.data-index]="i" id="User1" (drop)="dropUser($event)" (dragover)="allowDropUser($event, 'User1')">
+          <div *ngIf="item !== 'empty' && i+1<=6*currentPaginationUser1 && i+1>6*(currentPaginationUser1 - 1)" class="cell">
+            <div id='{{i}}User1' draggable="true" (dragstart)="drag($event)">
+              <p class="itemname">{{findCategory(item.marketHashName)}}</p>
+              <img src={{imageSrc+item.imageUrl}} draggable="false" />
+              <p class="price">$ 0.{{item.price.toFixed(0)}}</p>
+            </div>
+          </div>
+          <div *ngIf="item === 'empty' && i+1<=6*currentPaginationUser1 && i+1>6*(currentPaginationUser1 - 1)" class="empty-cell">
+          </div>
+        </div>
+      </div>
+
+      <!-- Pagination User1 START -->
+      <div>
+        <img src="../assets/images/left.png" class="arrows-pag" (click)="paginationMinusUser1()">
+        <h4 class="pag">&nbsp;&nbsp;&nbsp;&nbsp; {{currentPaginationUser1}} of {{paginationCounterUser1}} &nbsp;&nbsp;&nbsp;&nbsp;</h4>
+        <img src="../assets/images/right.png" class="arrows-pag" (click)="paginationPlusUser1()">
+      </div>
+      <!-- Pagination User1 END -->
+    </div>
+    <!-- USER1 END -->
+
+    <!-- Middle arrows START -->
+    <div class="col-md-2 arrows">
+      <img src="../assets/images/arrows.png">
+    </div>
+    <!-- Middle arrows END -->
+
+    <!-- USER2 START! -->
+    <div class="col-md-5 no-padding">
+      <h4>USER 2</h4>
+      <div class="grid-cell row justify-content-center">
+        <div *ngFor="let item of listItemsUser2; let i = index" [attr.data-index]="i" id="User2" (drop)="dropUser($event)" (dragover)="allowDropUser($event, 'User2')">
+          <div *ngIf="item !== 'empty' && i+1<=6*currentPaginationUser2 && i+1>6*(currentPaginationUser2 - 1)" class="cell">
+            <div id='{{i}}User2' draggable="true" (dragstart)="drag($event)">
+              <p class="itemname">{{findCategory(item.marketHashName)}}</p>
+              <img src={{imageSrc+item.imageUrl}} draggable="false" />
+              <p class="price">$ 0.{{item.price.toFixed(0)}}</p>
+            </div>
+          </div>
+          <div *ngIf="item === 'empty' && i+1<=6*currentPaginationUser2 && i+1>6*(currentPaginationUser2 - 1)" class="empty-cell">
+          </div>
+        </div>
+      </div>
+
+      <!-- Pagination User2 START -->
+      <div>
+        <img src="../assets/images/left.png" class="arrows-pag" (click)="paginationMinusUser2()">
+        <h4 class="pag">&nbsp;&nbsp;&nbsp;&nbsp; {{currentPaginationUser2}} of {{paginationCounterUser2}} &nbsp;&nbsp;&nbsp;&nbsp;</h4>
+        <img src="../assets/images/right.png" class="arrows-pag" (click)="paginationPlusUser2()">
+      </div>
+      <!-- Pagination User2 END  -->
+    </div>
+    <!-- USER2 END! -->
+  </div>
+
+  <!-- Save Button START-->
+  <div class="col-md-offset-5">
+    <button type="button" class="btn btn-success col-md-2" (click)="save()">Save</button>
+  </div>
+  <!-- Save Button END-->
+</div>
